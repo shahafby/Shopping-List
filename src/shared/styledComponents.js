@@ -7,21 +7,29 @@ export const Input = styled.input`
     border: none;
     border-radius: 3px;
     width: 90%;
-    border: 1px solid grey;
+    border: 1px solid #d4d4d4;
 `;
 
 export const Button = styled.button`
-    color: ${(props) => {
+    color: #8e8e8e;
+    font-size: 1em;
+    margin: 1em;
+    padding: 0.25em 1em;
+    border: 1px solid;
+    border-radius: 2px;
+    background-color: #ffffff00;
+    :hover {
+        background: ${(props) => {
         let color;
         switch (props.category) {
             case 'PRIME':
-                color = '#7c7ccc';
+                color = '#00accac7';
                 break;
             case 'DANGER':
                 color = '#e21b1b';
                 break;
             case 'WARN':
-                color = '#e2a22c';
+                color = '#f7ad19';
                 break;
             default:
                 color = 'black';
@@ -30,15 +38,8 @@ export const Button = styled.button`
         return color;
     }
     };
-    font-size: 1em;
-    margin: 1em;
-    padding: 0.25em 1em;
-    border: 1px solid;
-    border-radius: 2px;
-    :hover {
+        border: 1px solid #ffffff00;
         color: white;
-        border: 1px solid red;
-        background: red;
         cursor: pointer;
         padding: 0.30em 1.1em;
       }

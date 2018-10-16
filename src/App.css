@@ -1,5 +1,12 @@
 .App {
+  height: 50em;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  background-image: url(http://ichef.bbci.co.uk/wwfeatures/wm/live/1280_640/images/live/p0/5w/5t/p05w5tk2.jpg);
+  background-position: center;
+  background-size: cover;
+
 }
 
 .App-logo {
@@ -7,7 +14,8 @@
   height: 40vmin;
 }
 
-.App-header {
+
+/* .App-header {
   background-color: #282c34;
   min-height: 100vh;
   display: flex;
@@ -16,7 +24,7 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
-}
+} */
 
 .App-link {
   color: #61dafb;

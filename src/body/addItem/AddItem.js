@@ -1,6 +1,7 @@
 import { Input, Button } from '../../shared/styledComponents';
 import React from 'react';
 import styled from '../../../node_modules/styled-components';
+
 export class AddItem extends React.Component {
 
     constructor(props) {
@@ -39,8 +40,6 @@ export class AddItem extends React.Component {
     }
 };
 
-//const ButtonPrime = styled()
-
 const FormWrapper = styled.section`
     margin-left: 10em;
     min-height: 222px;
@@ -49,6 +48,5 @@ const FormWrapper = styled.section`
     float: left;
     border-radius: 5px;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    border: 1px solid grey;
-    // background-color: #f7faff;
+    background-color: #ffffffd6;
 `;
