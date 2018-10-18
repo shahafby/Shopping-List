@@ -1,5 +1,8 @@
 import styled from 'styled-components';
 
+/*
+* shared srtyled components to be used in components
+*/
 
 export const Input = styled.input`
     padding: 0.5em;

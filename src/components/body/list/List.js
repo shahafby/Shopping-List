@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { ListItem } from './item/ListItem'
 import { Button } from '../../../shared/styledComponents';
@@ -6,24 +6,22 @@ import { SortingKeys } from '../../../actions'
 
 
 export class List extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
     
-
-    
+    // building the list received from store
     createList() {
         const listItems = this.props.list.map((element) =>
             <ListItem
                 key={element.id}
                 value={element.item}
                 id={element.id}
-                onRemoveItem={this.props.onRemoveItem} />
+                onRemoveItem={this.props.onRemoveItem}
+                onEditItem={this.props.onEditItem} />
         );
         return listItems;
     };
 
+
+    // calc the total price of items
     calcSum() {
         let sum = 0;
         this.props.list.forEach(element => {

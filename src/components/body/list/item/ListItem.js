@@ -10,35 +10,45 @@ export class ListItem extends React.Component {
             item: this.props.value,
             editMode: false
         };
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmitChanges = this.handleSubmitChanges.bind(this);
     }
 
+    // toggle edit mode 
     onToggleEditMode() {
         let newState = JSON.parse(JSON.stringify(this.state));
         newState.editMode = !this.state.editMode;
         this.setState(newState);
     }
 
-    // handleChange(event) {
-    //     let inputVal = event.target.value;
-    //     let newState = this.state;
-    //     switch (event.target.name) {
-    //         case 'name':
-    //             newState.item.name = inputVal;
-    //             break;
+    // listen to input changes
+    handleChange(event) {
+        let inputVal = event.target.value;
+        let newState = JSON.parse(JSON.stringify(this.state));
+        switch (event.target.name) {
+            case 'name':
+                newState.item.name = inputVal;
+                break;
 
-    //         case 'price':
-    //             newState.item.price = inputVal;
-    //             break;
+            case 'price':
+                newState.item.price = inputVal;
+                break;
 
-    //         case 'amount':
-    //             newState.item.amount = inputVal;
-    //             break;
+            case 'amount':
+                newState.item.amount = inputVal;
+                break;
 
-    //         default:
-    //             break;
-    //     }
-    //     this.setState(newState);
-    // }
+            default:
+                break;
+        }
+        this.setState(newState);
+    }
+
+    // submit changes of item
+    handleSubmitChanges(){
+        this.props.onEditItem(this.props.id, this.state.item);
+        this.onToggleEditMode();
+    }
 
     render() {
         return (
@@ -59,11 +69,17 @@ export class ListItem extends React.Component {
                                 <CellWrapper style={{ "width": "12%" }}>
                                     {this.state.item.price * this.state.item.amount}$
                                 </CellWrapper>
+                                <ItemButton category="PRIME"
+                                    onClick={() => this.handleSubmitChanges()} className="item-btn"> Update
+                                </ItemButton>
+                                <ItemButton category="DANGER"
+                                    onClick={() => this.onToggleEditMode()} className="item-btn"> Cancel
+                                </ItemButton>
                             </ItemWrapper>
                         ) : (
                             <ItemWrapper>
                                 <CellWrapper>
-                                    <p>{this.state.item.name}</p>
+                                    {this.state.item.name}
                                 </CellWrapper>
                                 <CellWrapper>
                                     {this.state.item.price}$
@@ -74,12 +90,12 @@ export class ListItem extends React.Component {
                                 <CellWrapper style={{ "width": "12%" }}>
                                     {this.state.item.price * this.state.item.amount}$
                                 </CellWrapper>
-                                <DeleteButton category="DANGER"
+                                <ItemButton category="DANGER"
                                     onClick={() => this.props.onRemoveItem(this.props.id)} className="item-btn"> Delete
-                                </DeleteButton>
-                                <DeleteButton category="WARN"
+                                </ItemButton>
+                                <ItemButton category="WARN"
                                     onClick={() => this.onToggleEditMode()} className="item-btn"> Edit
-                                </DeleteButton>
+                                </ItemButton>
                             </ItemWrapper>
                         )}
                 </li>
@@ -105,10 +121,11 @@ const CellWrapper = styled.section`
     font-size: 12px;
 `;
 
-const DeleteButton = styled(Button)`
+const ItemButton = styled(Button)`
     font-size: 8px;
     padding: 1px 3px 1px 3px;
     margin: 2px;
+    float: right;
     :hover {
         padding: 1px 3px 1px 3px;
         margin: 2px;
@@ -118,4 +135,5 @@ const DeleteButton = styled(Button)`
 const EditInput = styled(Input)`
     width: -webkit-fill-available;
     margin: 0px 4px 0px 0px;
+    padding: 2px;
 `;

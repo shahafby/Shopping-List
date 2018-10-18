@@ -18,7 +18,7 @@ export class AddItem extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-
+    // listen to input changes
     handleChange(event) {
         let inputVal = event.target.value;
         let currentState = this.state;
@@ -41,7 +41,7 @@ export class AddItem extends React.Component {
         this.setState(currentState);
     }
 
-
+    // submit new item to store
     handleSubmit(event) {
         if (this.state.item.price < 0 || this.state.item.amount < 1) {
             alert('Amount and price could not be negative')

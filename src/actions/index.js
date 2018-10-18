@@ -5,6 +5,7 @@
 export const ADD_ITEM = 'ADD_ITEM';
 export const CLEAR_LIST = 'CLEAR_LIST';
 export const REMOVE_ITEM = 'REMOVE_ITEM';
+export const EDIT_ITEM = 'EDIT_ITEM'; 
 export const SET_SORTING_KEY = 'SET_SORTING_KEY';
 
 /*
@@ -37,6 +38,12 @@ export const removeItem = id => ({
 
 export const clearList = () => ({
     type: CLEAR_LIST,
+});
+
+export const editItem = (id, newItem) => ({
+    type:  EDIT_ITEM,
+    id,
+    newItem
 });
 
 export const setSortingKey = key => ({

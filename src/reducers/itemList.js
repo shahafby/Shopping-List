@@ -1,4 +1,4 @@
-import { ADD_ITEM, REMOVE_ITEM, CLEAR_LIST } from '../actions/index';
+import { ADD_ITEM, REMOVE_ITEM, CLEAR_LIST, EDIT_ITEM } from '../actions/index';
 
 const initialState = {
     id: 0,
@@ -8,6 +8,8 @@ const initialState = {
         price: 4
     }
 }
+
+// reducer for list actions
 export const itemList = (state = [ initialState ], action = {}) => {
     switch (action.type) {
         case ADD_ITEM:
@@ -19,7 +21,16 @@ export const itemList = (state = [ initialState ], action = {}) => {
         case REMOVE_ITEM:
             return state.filter(item => item.id !== action.id);
 
-        default:
+        case EDIT_ITEM:
+            let a = state.map(element => {
+                if (element.id === action.id) {
+                    element.item = action.newItem;
+                }
+                return element;
+            })
+            return a;
+
+        default: 
             return state;
     }
 }
