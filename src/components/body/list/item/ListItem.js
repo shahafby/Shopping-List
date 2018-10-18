@@ -31,11 +31,11 @@ export class ListItem extends React.Component {
                 break;
 
             case 'price':
-                newState.item.price = inputVal;
+                newState.item.price = Number(inputVal);
                 break;
 
             case 'amount':
-                newState.item.amount = inputVal;
+                newState.item.amount = Number(inputVal);
                 break;
 
             default:

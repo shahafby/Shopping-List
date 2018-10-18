@@ -43,12 +43,15 @@ export class AddItem extends React.Component {
 
     // submit new item to store
     handleSubmit(event) {
-        if (this.state.item.price < 0 || this.state.item.amount < 1) {
-            alert('Amount and price could not be negative')
-        } else if (!this.state.item.price || !this.state.item.amount || this.state.item.name === '') {
+        if (this.state.item.price === '' || this.state.item.amount === '' || this.state.item.name === '') {
             alert('Please make sure you field all fields')
+        } else if (this.state.item.price < 0 || this.state.item.amount < 1) {
+            alert('Price could not be negative, and amount need to be positive')
         } else {
-            let newItem = JSON.parse(JSON.stringify(this.state.item));
+            let newState = JSON.parse(JSON.stringify(this.state));;
+            let newItem = newState.item;
+            newItem.price = Number(newItem.price)
+            newItem.amount = Number(newItem.amount)
             this.props.dispatch(addItem(newItem));
             this.setState({
                 item: {
