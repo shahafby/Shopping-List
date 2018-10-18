@@ -1,22 +1,25 @@
-import { ADD_ITEM, REMOVE_ITEM } from '../actions/index';
+import { ADD_ITEM, REMOVE_ITEM, CLEAR_LIST } from '../actions/index';
 
-export const itemList = (state = [], action) => {
+const initialState = {
+    id: 0,
+    item: {
+        amount: "4",
+        name: "milk",
+        price: 4
+    }
+}
+export const itemList = (state = [ initialState ], action = {}) => {
     switch (action.type) {
         case ADD_ITEM:
-            return [
-                ...state,
-                {
-                    id: action.id,
-                    item: action.item,
-                }
-            ]
-        // case REMOVE_ITEM:
-        //     return state.map(item =>
-        //         (item.id === action.id)
-        //             ? { ...todo, completed: !todo.completed }
-        //             : todo
-        //     )
+            return state.concat([{ id: action.id, item: action.newItem }]);
+
+        case CLEAR_LIST:
+            return [];
+
+        case REMOVE_ITEM:
+            return state.filter(item => item.id !== action.id);
+
         default:
-            return state
+            return state;
     }
 }

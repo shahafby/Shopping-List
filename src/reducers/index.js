@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux'
 import { itemList } from './itemList'
-import { sortingKeys } from './sortingKeys'
+import { sortingKey } from './sortingKey'
 
 export default combineReducers({
     itemList,
-    sortingKeys
+    sortingKey
 })

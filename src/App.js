@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-
-import logo from './logo.svg';
+import { EditModal } from './components/modals/editModal';
 import './App.css';
-import { Header } from './header/Header';
-import { AppBody } from './body/AppBody';
+import { Header } from './components/header/Header';
+import { AppBody } from './components/body/AppBody';
 
 
 class App extends Component {
@@ -27,30 +26,5 @@ const appBackground = styled.div`
   height: 2000px;
 `;
 
-/*
-(
-  <div>
-    <div className="App">
-      <Header />
-      <header className="App-header">
-        <AppBody />
-
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-      </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-      </a>
-      </header>
-    </div>
-  </div>
-);
-*/
 export default App;
 

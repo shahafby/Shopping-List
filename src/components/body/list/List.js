@@ -1,38 +1,58 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { ListItem } from './item/ListItem'
-import { Button } from '../../shared/styledComponents';
+import { Button } from '../../../shared/styledComponents';
+import { SortingKeys } from '../../../actions'
 
 
 export class List extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { numbers: this.props.numbers };
     }
 
+    
+
+    
     createList() {
-        const numbers = this.state.numbers;
-        const listItems = numbers.map((number) =>
-            <ListItem key={number.toString()}
-                value={number} />
+        const listItems = this.props.list.map((element) =>
+            <ListItem
+                key={element.id}
+                value={element.item}
+                id={element.id}
+                onRemoveItem={this.props.onRemoveItem} />
         );
         return listItems;
     };
+
+    calcSum() {
+        let sum = 0;
+        this.props.list.forEach(element => {
+            sum += (element.item.price * element.item.amount);
+        });
+        return sum;
+    }
 
     render() {
         return (
             <ListContainer>
                 <ListHeading> My shopping list </ListHeading>
                 <ListWrapper >
-                    <ListHeader>Item</ListHeader>
-                    <ListHeader>Quantity</ListHeader>
-                    <ListHeader>Item price</ListHeader>
+                    <ListHeaderButton onClick={
+                        () => this.props.onSetSortKey(SortingKeys.BY_NAME)
+                        }>Item</ListHeaderButton>
+                    <ListHeaderButton onClick={
+                        () => this.props.onSetSortKey(SortingKeys.BY_PRICE)
+                        }>Price</ListHeaderButton>
+                    <ListHeaderButton onClick={
+                        () => this.props.onSetSortKey(SortingKeys.BY_QUANTITY)
+                        }>Amount</ListHeaderButton>
                     <ListHeader>Sum</ListHeader>
                     <ul style={{ "listStyle": "none", "padding": "unset" }} >
                         {this.createList()}
                     </ul>
                 </ListWrapper>
-                <ClearButton category={'DANGER'}>Clear List</ClearButton>
+                <Total>Total Price: {this.calcSum()}$</Total>
+                <ClearButton category={'DANGER'} onClick={this.props.onClearList}>Clear List</ClearButton>
             </ListContainer >
         )
     }
@@ -58,18 +78,34 @@ const ListHeading = styled.p`
 
 const ListWrapper = styled.div`
     text-align: left;
+    padding-left: 2em;
 `;
 
 const ListHeader = styled.section`
-    width: 23%;
+    width: 21%;
     display: inline-block;
     font-size: 12px;
     font-weight: 600;
 `;
 
+const ListHeaderButton = styled(ListHeader)`
+    :hover {
+        cursor: pointer;
+        color: #828282;
+    }
+`;
+
 
 const ClearButton = styled(Button)`
-position: absolute;
-right:    10em;
-bottom:   0;
+    position: absolute;
+    right:    10em;
+    bottom:   0;
+`;
+
+const Total = styled.div`
+    position: absolute;
+    text-align: left;
+    bottom:   6em;
+    font-size: 12px;
+    font-weight: 600;
 `;
